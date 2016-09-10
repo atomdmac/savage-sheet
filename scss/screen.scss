@@ -1,0 +1,87 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import 'normalize';
+
+$shadow: rgba(0, 0, 0, .25);
+$margin: 2em;
+$padding: $margin / 2;
+$max-width: 800px;
+
+$body-background: #ccc;
+$white: #fff;
+
+body {
+  background-color: $body-background;
+}
+
+h2 {
+  margin-top: 0.5em;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  padding: $padding;
+}
+
+.card {
+  background-color: $white;
+  box-shadow: 0 2px 2px $shadow;
+  margin: 0 $margin 0 0;
+  min-width: 250px;
+  padding: $padding;
+}
+
+label {
+  display: inline-block;
+  min-width: 80px;
+  vertical-align: top;
+
+  &::before {
+    content: '';
+    display: block;
+  }
+}
+
+input,
+select,
+textarea {
+  display: block;
+  box-sizing: border-box;
+}
+
+textarea {
+  margin-bottom: $margin / 2;
+  width: 100%;
+}
+
+select {
+  width: 100%;
+}
+
+input {
+  margin-bottom: $margin / 2;
+  vertical-align: top;
+
+  &[type='text'] {
+    display: block;
+    width: 100%;
+  }
+
+  &[type='radio'] {
+    display: inline-block;
+    margin-right: $padding;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}
