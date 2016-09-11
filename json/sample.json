@@ -1,0 +1,43 @@
+{
+  "name": "",
+  "profession": "",
+  "settingRules": "",
+  "quote": "",
+  "attributes": {
+    "agility": "1d4",
+    "smarts": "1d4",
+    "spirit": "1d4",
+    "strength": "1d4",
+    "vigor": "1d4"
+  },
+  "skills": [
+    {
+      "name": "",
+      "die": "1d4"
+    }
+  ],
+  "armor": {
+    "head": "",
+    "torso": "",
+    "arms": "",
+    "legs": ""
+  },
+  "equipment": [],
+  "totalWeightCarried": 0,
+  "weightLimit": 0,
+  "encumbrancePenalty": 0,
+  "hindrances": [],
+  "edges": [],
+  "injuries": [],
+  "weapons": [
+    {
+      "name": "",
+      "range": 0,
+      "rof": 0,
+      "damage": 0,
+      "ap": 0,
+      "weight": 0,
+      "notes": ""
+    }
+  ]
+}
