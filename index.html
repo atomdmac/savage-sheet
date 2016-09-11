@@ -3,36 +3,20 @@
 <head>
 	<title>Savage Worlds</title>
 	<link rel="stylesheet" type="text/css" href="css/screen.css" />
-	<script src='js/die.js'></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js'></script>
-	<script>
-	function onLoad () {
-
-		var die = new Die('2d12wa'),
-			total = 0, current;
-		for(var i=0; i<100; i++) {
-			current = die.roll(true);
-			total += current;
-			console.log(current);
-		}
-		console.log('avg: ', Number(total / i));
-		console.log(die.number, 'd', die.sides);
-	
-	}
-	</script>
 </head>
-<body onload="onLoad();">
+<body>
 <section class="wrapper">
 
 	<!-- Character Profile -->
 	<section class="card character-profile">
 		<h2>Character Profile</h2>
-		<label>Name:</label><input type="text" id="name" />
-		<label>Concept:</label><input type="text" id="concept" />
-		<label>Setting:</label><input type="text" id="setting" />
-		<label>Quote:</label><textarea id="quote"></textarea>
+		<label>Name:</label><input type="text" class="name" />
+		<label>Profession:</label><input type="text" class="profession" />
+		<label>Concept:</label><input type="text" class="concept" />
+		<label>Setting:</label><input type="text" class="setting" />
+		<label>Quote:</label><textarea class="quote"></textarea>
 		<label>Rank:</label>
-			<select id="rank>"
+			<select class="rank>"
 				<option value="novice">Novice</option>
 				<option value="seasoned">Seasoned</option>
 				<option value="veteran">Veteran</option>
@@ -162,5 +146,6 @@
 
 
 </section>
+<script src='js/bundle.js'></script>
 </body>
 </html>

@@ -46,7 +46,6 @@ function _roll(times, sides, canAce) {
 		aced = current == sides && canAce ? true : false;
 		i++;
 	}
-	console.log(results);
 	return results;
 }
 
@@ -98,8 +97,6 @@ Die.prototype.roll = function (useWild) {
 		}
 	}
 
-	console.log('final results: ', results);
-
 	total = _getTotal(results) + wildTotal;
 
 	return _getTotal(results);
@@ -114,3 +111,5 @@ Die.prototype.downgrade = function () {
 };
 
 // });
+
+module.exports = Die;
