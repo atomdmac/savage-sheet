@@ -4,8 +4,8 @@ var Die = require('./die');
 var sampleJSON = require('../json/sample');
 var storage = window.localStorage;
 
-var char = storage.get('char');
-if(char !== undefined) {
+var char = storage.getItem('char');
+if(char !== null) {
   char = JSON.parse(char);
 } else {
   char = sampleJSON;
@@ -16,11 +16,22 @@ var uiBinding = Bind(char, {
   profession: '.character-profile .profession',
   concept: '.character-profile .concept',
   setting: '.character-profile .setting',
-  quote: '.character-profile .quote'//,
-  // skills: {
-  //   dom: '.character-profile .skills',
-  //   transform: function () {}
-  // }
+  quote: '.character-profile .quote',
+  rank: {
+    dom: '.character-profile .rank',
+    transform: function (value) {
+      var el = document.querySelectorAll('.rank option[value="' + value + '"]')[0];
+      var rnk = document.querySelectorAll('.rank')[0];
+      var indx = el.index;
+
+      // HACK: Using a timeout so we can allow this func to return markup.
+      setTimeout(function () {
+        rnk.selectedIndex = indx;
+      }, 1);
+
+      return document.querySelectorAll('.rank')[0].innerHTML;
+    }
+  }
 });
 
 window.onbeforeunload = function () {
@@ -160,6 +171,7 @@ module.exports={
   "concept": "",
   "setting": "",
   "quote": "",
+  "rank": "novice",
   "attributes": {
     "agility": "1d4",
     "smarts": "1d4",
