@@ -1,10 +1,23 @@
 {
   "name": "Brain",
-  "profession": "",
-  "concept": "",
+  "profession": "Archer",
+  "concept": "Brawler",
   "setting": "",
   "quote": "",
-  "rank": "novice",
+  "currentRank": 0,
+  "possibleRanks": [
+    "Novice",
+    "Seasoned",
+    "Veteran",
+    "Heroic",
+    "Legendary"
+  ],
+  "dice": [
+    "1d4",
+    "1d6",
+    "1d8",
+    "1d12"
+  ],
   "attributes": {
     "agility": "1d4",
     "smarts": "1d4",

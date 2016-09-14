@@ -85,3 +85,11 @@ ul {
     list-style: none;
   }
 }
+
+.die-list {
+  display: inline-block;
+  
+  li {
+    display: inline-block;
+  }
+}

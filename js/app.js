@@ -1,4 +1,4 @@
-var Bind = require('bind.js');
+var rivets = require('rivets');
 var Die = require('./die');
 var sampleJSON = require('../json/sample');
 var storage = window.localStorage;
@@ -9,33 +9,53 @@ if(char !== null) {
 } else {
   char = sampleJSON;
 }
-// Bind UI to Data.
-var uiBinding = Bind(char, {
-  name: '.character-profile .name',
-  profession: '.character-profile .profession',
-  concept: '.character-profile .concept',
-  setting: '.character-profile .setting',
-  quote: '.character-profile .quote',
-  rank: {
-    dom: '.character-profile .rank',
-    transform: function (value) {
-      var el = document.querySelectorAll('.rank option[value="' + value + '"]')[0];
-      var rnk = document.querySelectorAll('.rank')[0];
-      var indx = el.index;
 
-      // HACK: Using a timeout so we can allow this func to return markup.
-      setTimeout(function () {
-        rnk.selectedIndex = indx;
-      }, 1);
+rivets.binders['die-list'] = {
+  publishes: true,
+  bind: function(el) {
+    var publish = this.publish;
+    el.querySelectorAll('input[type=radio]').forEach(function (radio) {
+      radio.addEventListener('change', publish);
+    });
+  },
 
-      return document.querySelectorAll('.rank')[0].innerHTML;
+  unbind: function(el) {
+    var publish = this.publish;
+    el.querySelectorAll('input[type=radio]').forEach(function (radio) {
+      radio.removeEventListener('change', publish);
+    });
+  },
+
+  routine: function(el, value) {
+    var radios = el.querySelectorAll('input[type=radio]');
+    for(var i=0; i<radios.length; i++) {
+      if(radios[i].value === value) radios[i].checked = true;
+    }
+  },
+
+  getValue : function(el) {
+    var radios = el.querySelectorAll('input[type=radio]');
+    for(var i=0; i<radios.length; i++) {
+      if(radios[i].checked)  {
+        console.log(radios[i].value);
+        return radios[i].value;
+      }
     }
   }
-});
+};
+
+// DEBUG
+console.log(char);
+
+// Bind UI to Data.
+rivets.bind(document.body, char);
 
 window.onbeforeunload = function () {
-  storage.setItem('char', JSON.stringify(uiBinding));
+  storage.setItem('char', JSON.stringify(char));
 };
+
+window.C = char;
+console.log(C);
 
 // Die test.
 var die = new Die('2d12wa'),

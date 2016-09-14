@@ -352,3 +352,12 @@ ul {
 ul li {
   list-style: none;
 }
+
+/* line 89, ../scss/screen.scss */
+.die-list {
+  display: inline-block;
+}
+/* line 92, ../scss/screen.scss */
+.die-list li {
+  display: inline-block;
+}

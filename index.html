@@ -10,18 +10,14 @@
 	<!-- Character Profile -->
 	<section class="card character-profile">
 		<h2>Character Profile</h2>
-		<label>Name:</label><input type="text" class="name" />
-		<label>Profession:</label><input type="text" class="profession" />
-		<label>Concept:</label><input type="text" class="concept" />
-		<label>Setting:</label><input type="text" class="setting" />
-		<label>Quote:</label><textarea class="quote"></textarea>
+		<label>Name:</label><input type="text" class="name" rv-value="name" />
+		<label>Profession:</label><input type="text" class="profession" rv-value="profession"s/>
+		<label>Concept:</label><input type="text" class="concept" rv-value="concept" />
+		<label>Setting:</label><input type="text" class="setting" rv-value="setting"/>
+		<label>Quote:</label><textarea class="quote" rv-value="quote"> </textarea>
 		<label>Rank:</label>
-			<select class="rank">
-				<option value="novice">Novice</option>
-				<option value="seasoned">Seasoned</option>
-				<option value="veteran">Veteran</option>
-				<option value="heroic">Heroic</option>
-				<option value="legendary">Legendary</option>
+			<select rv-value="currentRank">
+				<option rv-each-cur-rank="possibleRanks" rv-selected="cur-rank == currentRank">{cur-rank}</option>
 			</select>
 	</section>
 
@@ -29,34 +25,35 @@
 	<section class="card attributes">
 		<h2>Attributes</h2>
 		<label>Agility:</label>
-			<input type="radio" name="dice_agility" value="1d4" />
-			<input type="radio" name="dice_agility" value="1d6" />
-			<input type="radio" name="dice_agility" value="1d8" />
-			<input type="radio" name="dice_agility" value="1d12" />
-			<br />
+		<ul class="die-list" rv-die-list="attributes.agility">
+			<li rv-each-die="dice">
+				<input type="radio" name="dice_agility" rv-value="die" />
+			</li>
+		</ul>
 		<label>Smarts:</label>
-			<input type="radio" name="dice_smarts" value="1d4" />
-			<input type="radio" name="dice_smarts" value="1d6" />
-			<input type="radio" name="dice_smarts" value="1d8" />
-			<input type="radio" name="dice_smarts" value="1d12" />
-			<br />
+		<ul class="die-list" rv-die-list="attributes.smarts">
+			<li rv-each-die="dice">
+				<input type="radio" name="smarts" rv-value="die" />
+			</li>
+		</ul>
 		<label>Spirit:</label>
-			<input type="radio" name="dice_spirit" value="1d4" />
-			<input type="radio" name="dice_spirit" value="1d6" />
-			<input type="radio" name="dice_spirit" value="1d8" />
-			<input type="radio" name="dice_spirit" value="1d12" />
-			<br />
+		<ul class="die-list" rv-die-list="attributes.spirit">
+			<li rv-each-die="dice">
+				<input type="radio" name="dice_spirit" rv-value="die" />
+			</li>
+		</ul>
 		<label>Strength:</label>
-			<input type="radio" name="dice_strength" value="1d4" />
-			<input type="radio" name="dice_strength" value="1d6" />
-			<input type="radio" name="dice_strength" value="1d8" />
-			<input type="radio" name="dice_strength" value="1d12" />
-			<br />
+		<ul class="die-list" rv-die-list="attributes.strength">
+			<li rv-each-die="dice">
+				<input type="radio" name="dice_strength" rv-value="die" />
+			</li>
+		</ul>
 		<label>Vigor:</label>
-			<input type="radio" name="dice_vigor" value="1d4" />
-			<input type="radio" name="dice_vigor" value="1d6" />
-			<input type="radio" name="dice_vigor" value="1d8" />
-			<input type="radio" name="dice_vigor" value="1d12" />
+			<ul class="die-list" rv-die-list="attributes.vigor">
+			<li rv-each-die="dice">
+				<input type="radio" name="dice_vigor" rv-value="die" />
+			</li>
+		</ul>
 	</section>
 
 	<!-- Derived Attributes -->
