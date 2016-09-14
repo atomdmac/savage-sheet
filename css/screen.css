@@ -320,44 +320,45 @@ textarea {
 textarea {
   margin-bottom: 1em;
   width: 100%;
+  height: 100px;
 }
 
-/* line 61, ../scss/screen.scss */
+/* line 62, ../scss/screen.scss */
 select {
   width: 100%;
 }
 
-/* line 65, ../scss/screen.scss */
+/* line 66, ../scss/screen.scss */
 input {
   margin-bottom: 1em;
   vertical-align: top;
 }
-/* line 69, ../scss/screen.scss */
+/* line 70, ../scss/screen.scss */
 input[type='text'] {
   display: block;
   width: 100%;
 }
-/* line 74, ../scss/screen.scss */
+/* line 75, ../scss/screen.scss */
 input[type='radio'] {
   display: inline-block;
   margin-right: 1em;
 }
 
-/* line 80, ../scss/screen.scss */
+/* line 81, ../scss/screen.scss */
 ul {
   margin: 0;
   padding: 0;
 }
-/* line 84, ../scss/screen.scss */
+/* line 85, ../scss/screen.scss */
 ul li {
   list-style: none;
 }
 
-/* line 89, ../scss/screen.scss */
+/* line 90, ../scss/screen.scss */
 .die-list {
   display: inline-block;
 }
-/* line 92, ../scss/screen.scss */
+/* line 93, ../scss/screen.scss */
 .die-list li {
   display: inline-block;
 }
