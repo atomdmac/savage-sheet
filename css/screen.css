@@ -354,11 +354,17 @@ ul li {
   list-style: none;
 }
 
-/* line 90, ../scss/screen.scss */
+/* line 91, ../scss/screen.scss */
+.list input[type='text'] {
+  display: inline;
+  width: 85%;
+}
+
+/* line 97, ../scss/screen.scss */
 .die-list {
   display: inline-block;
 }
-/* line 93, ../scss/screen.scss */
+/* line 100, ../scss/screen.scss */
 .die-list li {
   display: inline-block;
 }

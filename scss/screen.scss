@@ -87,6 +87,13 @@ ul {
   }
 }
 
+.list {
+  input[type='text'] {
+    display: inline;
+    width: 85%;
+  }
+}
+
 .die-list {
   display: inline-block;
   
