@@ -2,17 +2,56 @@ var rivets = require('rivets');
 var Die = require('./die');
 var sampleJSON = require('../json/sample');
 var storage = window.localStorage;
+var userName = 'atom';
 
 // Add forEach support to NodeList objects.
 NodeList.prototype.forEach = Array.prototype.forEach;
 
-// Load previously created characters.
-var char = storage.getItem('char');
-if(char !== null) {
-  char = JSON.parse(char);
-} else {
-  char = sampleJSON;
+function loadData (name) {
+  var data = localStorage.getItem('savage-worlds-' + name);
+  if(data) {
+    return JSON.parse(data);
+  }
+
+  // There is no existing data to load.  Let's return a fresh save template.
+  else {
+    return sampleJSON;
+  }
 }
+
+function saveData (name, json) {
+  localStorage.setItem('savage-worlds-' + name, JSON.stringify(json));
+}
+
+// Load previously created characters.
+var char = loadData(userName);
+
+// Create a place to store UI controllers
+rivets.controllers = {};
+
+// An editiable list view
+rivets.controllers['list'] = function (el, model) {
+  this.listItems = model.listItems;
+  this.addItem = function (event) {
+    // TODO: Should templates for new list items be defined elsewhere?
+    model.listItems.push({
+      name: "",
+      die: "1d4"
+    });
+  };
+  this.removeItem = function (e, o) {
+    model.listItems.splice(o.index, 1);
+  };
+};
+
+rivets.components['list'] = {
+  template: function () {
+    return document.querySelector('#tpl-list').innerHTML;
+  },
+  initialize: function (el, model) {
+    return new rivets.controllers['list'](el, model);
+  }
+};
 
 rivets.binders['die-list'] = {
   publishes: true,
@@ -66,16 +105,13 @@ rivets.binders['select'] = {
   }
 };
 
-// DEBUG
-console.log(char);
-
 // Bind UI to Data.
 rivets.bind(document.body, char);
 
 // A convenient way to clear out character data while testing.
 var CLEAR_DATA = false;
 document.querySelector('#btn-clear-data').addEventListener('click', function () {
-  storage.removeItem('char');
+  storage.removeItem('savage-worlds-' + userName);
   CLEAR_DATA = true;
 });
 
@@ -83,9 +119,13 @@ document.querySelector('#btn-output-json').addEventListener('click', function ()
   document.querySelector('#txt-output-json').value = JSON.stringify(char);
 });
 
+document.querySelector('#btn-import-json').addEventListener('click', function () {
+  char = JSON.parse(document.querySelector('#txt-import-json').value);
+});
+
 window.onbeforeunload = function () {
   // TODO: Remove this awful debug code.
-  if(!CLEAR_DATA) storage.setItem('char', JSON.stringify(char));
+  if(!CLEAR_DATA) saveData(userName, char);
 };
 
 window.C = char;

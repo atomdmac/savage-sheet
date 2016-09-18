@@ -3,6 +3,17 @@
 <head>
 	<title>Savage Worlds</title>
 	<link rel="stylesheet" type="text/css" href="css/screen.css" />
+
+	<script type="text/html" id="tpl-list">
+		<ul class="list">
+			<li rv-each-item="listItems">
+				<label>Name:</label>
+				<input type="text" rv-value="item.name"/>
+				<button class="btn btn-remove" rv-on-click="removeItem">X</button>
+			</li>
+		</ul>
+		<button class="btn btn-add" rv-on-click="addItem">Add Skill</button>
+	</script>
 </head>
 <body>
 <section class="wrapper">
@@ -12,6 +23,8 @@
 		<button id="btn-clear-data">Clear Data</button>
 		<button id="btn-output-json">Output JSON</button>
 		<textarea id="txt-output-json"></textarea>
+		<button id="btn-import-json">Import JSON</button>
+		<textarea id="txt-import-json"></textarea>
 	</section>
 
 	<!-- Character Profile -->
@@ -75,66 +88,31 @@
 	<!-- Skills -->
 	<section class="card skills">
 		<h2>Skills</h2>
-		<ul class="list">
-			<li class="skill">
-				<label>Name:</label>
-				<input type="text" />
-				<button class="btn btn-remove">X</button>
-			</li>
-		</ul>
-		<button class="btn btn-add">Add Skill</button>
+		<list list-items="skills"></list>
 	</section>
 
 	<!-- Armor -->
 	<section class="card armor">
 		<h2>Armor</h2>
-		<ul class="list">
-			<li class="skill">
-				<label>Name:</label>
-				<input type="text" />
-				<button class="btn btn-remove">X</button>
-			</li>
-		</ul>
-		<button class="btn btn-add">Add Skill</button>
+		<p>Coming soon.</p>
 	</section>
 
 	<!-- Equipment -->
 	<section class="card equipment">
 		<h2>Equipment</h2>
-		<ul class="list">
-			<li class="skill">
-				<label>Name:</label>
-				<input type="text" />
-				<button class="btn btn-remove">X</button>
-			</li>
-		</ul>
-		<button class="btn btn-add">Add Skill</button>
+		<list list-items="equipment"></list>
 	</section>
 
 	<!-- Hindrances -->
 	<section class="card hindrances">
 		<h2>Hindrances</h2>
-		<ul class="list">
-			<li class="hindrance">
-				<label>Name:</label>
-				<input type="text" />
-				<button class="btn btn-remove">X</button>
-			</li>
-		</ul>
-		<button class="btn btn-add">Add Skill</button>
+		<list list-items="hindrances"></list>
 	</section>
 
 	<!-- Edges -->
 	<section class="card edges">
 		<h2>Edges</h2>
-		<ul class="list">
-			<li class="edge">
-				<label>Name:</label>
-				<input type="text" />
-				<button class="btn btn-remove">X</button>
-			</li>
-		</ul>
-		<button class="btn btn-add">Add Skill</button>
+		<list list-items="edges"></list>
 	</section>
 
 	<!-- Weapons -->
