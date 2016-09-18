@@ -283,32 +283,33 @@ h2 {
 /* line 24, ../scss/screen.scss */
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  max-width: 500px;
   padding: 1em;
 }
 
-/* line 30, ../scss/screen.scss */
+/* line 31, ../scss/screen.scss */
 .card {
   background-color: #fff;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-  margin: 0 2em 0 0;
+  margin: 2em 2em 0 0;
   min-width: 250px;
   padding: 1em;
 }
 
-/* line 38, ../scss/screen.scss */
+/* line 39, ../scss/screen.scss */
 label {
   display: inline-block;
   min-width: 80px;
   vertical-align: top;
 }
-/* line 43, ../scss/screen.scss */
+/* line 44, ../scss/screen.scss */
 label::before {
   content: '';
   display: block;
 }
 
-/* line 49, ../scss/screen.scss */
+/* line 50, ../scss/screen.scss */
 input,
 select,
 textarea {
@@ -316,55 +317,55 @@ textarea {
   box-sizing: border-box;
 }
 
-/* line 56, ../scss/screen.scss */
+/* line 57, ../scss/screen.scss */
 textarea {
   margin-bottom: 1em;
   width: 100%;
   height: 100px;
 }
 
-/* line 62, ../scss/screen.scss */
+/* line 63, ../scss/screen.scss */
 select {
   width: 100%;
 }
 
-/* line 66, ../scss/screen.scss */
+/* line 67, ../scss/screen.scss */
 input {
   margin-bottom: 1em;
   vertical-align: top;
 }
-/* line 70, ../scss/screen.scss */
+/* line 71, ../scss/screen.scss */
 input[type='text'] {
   display: block;
   width: 100%;
 }
-/* line 75, ../scss/screen.scss */
+/* line 76, ../scss/screen.scss */
 input[type='radio'] {
   display: inline-block;
   margin-right: 1em;
 }
 
-/* line 81, ../scss/screen.scss */
+/* line 82, ../scss/screen.scss */
 ul {
   margin: 0;
   padding: 0;
 }
-/* line 85, ../scss/screen.scss */
+/* line 86, ../scss/screen.scss */
 ul li {
   list-style: none;
 }
 
-/* line 91, ../scss/screen.scss */
+/* line 92, ../scss/screen.scss */
 .list input[type='text'] {
   display: inline;
   width: 85%;
 }
 
-/* line 97, ../scss/screen.scss */
+/* line 98, ../scss/screen.scss */
 .die-list {
   display: inline-block;
 }
-/* line 100, ../scss/screen.scss */
+/* line 101, ../scss/screen.scss */
 .die-list li {
   display: inline-block;
 }

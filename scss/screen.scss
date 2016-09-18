@@ -23,14 +23,15 @@ h2 {
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  max-width: 500px;
   padding: $padding;
 }
 
 .card {
   background-color: $white;
   box-shadow: 0 2px 2px $shadow;
-  margin: 0 $margin 0 0;
+  margin: $margin $margin 0 0;
   min-width: 250px;
   padding: $padding;
 }
