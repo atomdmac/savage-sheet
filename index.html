@@ -7,6 +7,13 @@
 <body>
 <section class="wrapper">
 
+	<!-- Debug Tools -->
+	<section class="card debug-tools">
+		<button id="btn-clear-data">Clear Data</button>
+		<button id="btn-output-json">Output JSON</button>
+		<textarea id="txt-output-json"></textarea>
+	</section>
+
 	<!-- Character Profile -->
 	<section class="card character-profile">
 		<h2>Character Profile</h2>
@@ -16,8 +23,8 @@
 		<label>Setting:</label><input type="text" class="setting" rv-value="setting"/>
 		<label>Quote:</label><textarea class="quote" rv-value="quote"> </textarea>
 		<label>Rank:</label>
-			<select rv-value="currentRank">
-				<option rv-each-cur-rank="possibleRanks" rv-selected="cur-rank == currentRank">{cur-rank}</option>
+			<select rv-select="currentRank">
+				<option rv-each-cur-rank="possibleRanks" rv-value="%cur-rank%">{cur-rank}</option>
 			</select>
 	</section>
 
