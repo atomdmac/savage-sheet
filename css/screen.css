@@ -298,18 +298,24 @@ h2 {
 }
 
 /* line 39, ../scss/screen.scss */
+.character-sheets {
+  display: flex;
+  flex-direction: row;
+}
+
+/* line 44, ../scss/screen.scss */
 label {
   display: inline-block;
   min-width: 80px;
   vertical-align: top;
 }
-/* line 44, ../scss/screen.scss */
+/* line 49, ../scss/screen.scss */
 label::before {
   content: '';
   display: block;
 }
 
-/* line 50, ../scss/screen.scss */
+/* line 55, ../scss/screen.scss */
 input,
 select,
 textarea {
@@ -317,55 +323,55 @@ textarea {
   box-sizing: border-box;
 }
 
-/* line 57, ../scss/screen.scss */
+/* line 62, ../scss/screen.scss */
 textarea {
   margin-bottom: 1em;
   width: 100%;
   height: 100px;
 }
 
-/* line 63, ../scss/screen.scss */
+/* line 68, ../scss/screen.scss */
 select {
   width: 100%;
 }
 
-/* line 67, ../scss/screen.scss */
+/* line 72, ../scss/screen.scss */
 input {
   margin-bottom: 1em;
   vertical-align: top;
 }
-/* line 71, ../scss/screen.scss */
+/* line 76, ../scss/screen.scss */
 input[type='text'] {
   display: block;
   width: 100%;
 }
-/* line 76, ../scss/screen.scss */
+/* line 81, ../scss/screen.scss */
 input[type='radio'] {
   display: inline-block;
   margin-right: 1em;
 }
 
-/* line 82, ../scss/screen.scss */
+/* line 87, ../scss/screen.scss */
 ul {
   margin: 0;
   padding: 0;
 }
-/* line 86, ../scss/screen.scss */
+/* line 91, ../scss/screen.scss */
 ul li {
   list-style: none;
 }
 
-/* line 92, ../scss/screen.scss */
+/* line 97, ../scss/screen.scss */
 .list input[type='text'] {
   display: inline;
   width: 85%;
 }
 
-/* line 98, ../scss/screen.scss */
+/* line 103, ../scss/screen.scss */
 .die-list {
   display: inline-block;
 }
-/* line 101, ../scss/screen.scss */
+/* line 106, ../scss/screen.scss */
 .die-list li {
   display: inline-block;
 }

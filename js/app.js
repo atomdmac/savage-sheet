@@ -17,6 +17,7 @@ function loadData (name) {
   else {
     return sampleJSON;
   }
+
 }
 
 function saveData (name, json) {
@@ -25,9 +26,22 @@ function saveData (name, json) {
 
 // Load previously created characters.
 var char = loadData(userName);
+// DEBUG
+window.C = char;
+console.log(C);
 
 // Create a place to store UI controllers
 rivets.controllers = {};
+
+// A character sheet
+rivets.controllers['character-sheet'] = function (el, model) {
+  // for(var prop in model.character) {
+  //   if(model.character.hasOwnProperty(prop)) {
+  //     this[prop] = model.character[prop];
+  //   }
+  // }
+  this.character = model.character;
+};
 
 // An editiable list view
 rivets.controllers['list'] = function (el, model) {
@@ -50,6 +64,15 @@ rivets.components['list'] = {
   },
   initialize: function (el, model) {
     return new rivets.controllers['list'](el, model);
+  }
+};
+
+rivets.components['character-sheet'] = {
+  template: function () {
+    return document.querySelector('#tpl-character-sheet').innerHTML;
+  },
+  initialize: function (el, model) {
+    return new rivets.controllers['character-sheet'](el, model);
   }
 };
 
@@ -123,13 +146,17 @@ document.querySelector('#btn-import-json').addEventListener('click', function ()
   char = JSON.parse(document.querySelector('#txt-import-json').value);
 });
 
+document.querySelector('#btn-add-character').addEventListener('click', function () {
+  char.characters.push(
+    JSON.parse(JSON.stringify(char.characterTemplate))
+  );
+});
+
 window.onbeforeunload = function () {
   // TODO: Remove this awful debug code.
   if(!CLEAR_DATA) saveData(userName, char);
 };
 
-window.C = char;
-console.log(C);
 
 
 // Die test.

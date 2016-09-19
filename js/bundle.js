@@ -18,6 +18,7 @@ function loadData (name) {
   else {
     return sampleJSON;
   }
+
 }
 
 function saveData (name, json) {
@@ -26,9 +27,22 @@ function saveData (name, json) {
 
 // Load previously created characters.
 var char = loadData(userName);
+// DEBUG
+window.C = char;
+console.log(C);
 
 // Create a place to store UI controllers
 rivets.controllers = {};
+
+// A character sheet
+rivets.controllers['character-sheet'] = function (el, model) {
+  // for(var prop in model.character) {
+  //   if(model.character.hasOwnProperty(prop)) {
+  //     this[prop] = model.character[prop];
+  //   }
+  // }
+  this.character = model.character;
+};
 
 // An editiable list view
 rivets.controllers['list'] = function (el, model) {
@@ -51,6 +65,15 @@ rivets.components['list'] = {
   },
   initialize: function (el, model) {
     return new rivets.controllers['list'](el, model);
+  }
+};
+
+rivets.components['character-sheet'] = {
+  template: function () {
+    return document.querySelector('#tpl-character-sheet').innerHTML;
+  },
+  initialize: function (el, model) {
+    return new rivets.controllers['character-sheet'](el, model);
   }
 };
 
@@ -124,13 +147,17 @@ document.querySelector('#btn-import-json').addEventListener('click', function ()
   char = JSON.parse(document.querySelector('#txt-import-json').value);
 });
 
+document.querySelector('#btn-add-character').addEventListener('click', function () {
+  char.characters.push(
+    JSON.parse(JSON.stringify(char.characterTemplate))
+  );
+});
+
 window.onbeforeunload = function () {
   // TODO: Remove this awful debug code.
   if(!CLEAR_DATA) saveData(userName, char);
 };
 
-window.C = char;
-console.log(C);
 
 
 // Die test.
@@ -261,70 +288,73 @@ Die.prototype.downgrade = function () {
 module.exports = Die;
 },{}],3:[function(require,module,exports){
 module.exports={
-  "name": "Brain",
-  "profession": "Archer",
-  "concept": "Brawler",
-  "setting": "",
-  "quote": "",
-  "currentRank": 0,
-  "possibleRanks": [
-    "Novice",
-    "Seasoned",
-    "Veteran",
-    "Heroic",
-    "Legendary"
-  ],
-  "dice": [
-    "1d4",
-    "1d6",
-    "1d8",
-    "1d12"
-  ],
-  "attributes": {
-    "agility": "1d4",
-    "smarts": "1d4",
-    "spirit": "1d4",
-    "strength": "1d4",
-    "vigor": "1d4"
-  },
-  "skills": [
-    {
-      "name": "Skill 1",
-      "die": "1d4"
+  "characters": [],
+  "characterTemplate": {
+    "name": "Brain",
+    "profession": "Archer",
+    "concept": "Brawler",
+    "setting": "",
+    "quote": "",
+    "currentRank": 0,
+    "possibleRanks": [
+      "Novice",
+      "Seasoned",
+      "Veteran",
+      "Heroic",
+      "Legendary"
+    ],
+    "dice": [
+      "1d4",
+      "1d6",
+      "1d8",
+      "1d12"
+    ],
+    "attributes": {
+      "agility": "1d4",
+      "smarts": "1d4",
+      "spirit": "1d4",
+      "strength": "1d4",
+      "vigor": "1d4"
     },
-    {
-      "name": "Skill 2",
-      "die": "1d4"
+    "skills": [
+      {
+        "name": "Skill 1",
+        "die": "1d4"
+      },
+      {
+        "name": "Skill 2",
+        "die": "1d4"
+      },
+      {
+        "name": "Skill 3",
+        "die": "1d4"
+      }
+    ],
+    "armor": {
+      "head": "",
+      "torso": "",
+      "arms": "",
+      "legs": ""
     },
-    {
-      "name": "Skill 3",
-      "die": "1d4"
-    }
-  ],
-  "armor": {
-    "head": "",
-    "torso": "",
-    "arms": "",
-    "legs": ""
-  },
-  "equipment": [],
-  "totalWeightCarried": 0,
-  "weightLimit": 0,
-  "encumbrancePenalty": 0,
-  "hindrances": [],
-  "edges": [],
-  "injuries": [],
-  "weapons": [
-    {
-      "name": "",
-      "range": 0,
-      "rof": 0,
-      "damage": 0,
-      "ap": 0,
-      "weight": 0,
-      "notes": ""
-    }
-  ]
+    "equipment": [],
+    "totalWeightCarried": 0,
+    "weightLimit": 0,
+    "encumbrancePenalty": 0,
+    "hindrances": [],
+    "edges": [],
+    "injuries": [],
+    "weapons": [
+      {
+        "name": "",
+        "range": 0,
+        "rof": 0,
+        "damage": 0,
+        "ap": 0,
+        "weight": 0,
+        "notes": ""
+      }
+    ]
+  }
 }
 },{}],4:[function(require,module,exports){
 // Rivets.js

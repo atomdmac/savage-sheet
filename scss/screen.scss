@@ -36,6 +36,11 @@ h2 {
   padding: $padding;
 }
 
+.character-sheets {
+  display: flex;
+  flex-direction: row;
+}
+
 label {
   display: inline-block;
   min-width: 80px;

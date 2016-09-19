@@ -14,10 +14,113 @@
 		</ul>
 		<button class="btn btn-add" rv-on-click="addItem">Add Skill</button>
 	</script>
+	<script type="text/html" id="tpl-character-sheet">
+		<section class="character-sheet wrapper">
+			<!-- Character Profile -->
+			<section class="card character-profile">
+				<h2>Character Profile</h2>
+				<label>Name:</label><input type="text" class="name" rv-value="character.name" />
+				<label>Profession:</label><input type="text" class="profession" rv-value="character.profession"/>
+				<label>Concept:</label><input type="text" class="concept" rv-value="character.concept" />
+				<label>Setting:</label><input type="text" class="setting" rv-value="character.setting"/>
+				<label>Quote:</label><textarea class="quote" rv-value="character.quote"> </textarea>
+				<label>Rank:</label>
+					<select rv-select="character.currentRank">
+						<option rv-each-cur-rank="character.possibleRanks" rv-value="%cur-rank%">{cur-rank}</option>
+					</select>
+			</section>
+
+			<!-- Attributes -->
+			<section class="card attributes">
+				<h2>Attributes</h2>
+				<label>Agility:</label>
+				<form>
+				<ul class="die-list" rv-die-list="character.attributes.agility">
+					<li rv-each-die="character.dice">
+						<input type="radio" name="dice_agility" rv-value="die" />
+					</li>
+				</ul>
+				<label>Smarts:</label>
+				<ul class="die-list" rv-die-list="character.attributes.smarts">
+					<li rv-each-die="character.dice">
+						<input type="radio" name="smarts" rv-value="die" />
+					</li>
+				</ul>
+				<label>Spirit:</label>
+				<ul class="die-list" rv-die-list="character.attributes.spirit">
+					<li rv-each-die="character.dice">
+						<input type="radio" name="dice_spirit" rv-value="die" />
+					</li>
+				</ul>
+				<label>Strength:</label>
+				<ul class="die-list" rv-die-list="character.attributes.strength">
+					<li rv-each-die="character.dice">
+						<input type="radio" name="dice_strength" rv-value="die" />
+					</li>
+				</ul>
+				<label>Vigor:</label>
+					<ul class="die-list" rv-die-list="character.attributes.vigor">
+					<li rv-each-die="character.dice">
+						<input type="radio" name="dice_vigor" rv-value="die" />
+					</li>
+				</ul>
+				</form>
+			</section>
+
+			<!-- Derived Attributes -->
+			<section class="card derived-attributes">
+				<h2>Derived Attributes</h2>
+				<label>Charisma:</label><input type="text" id="charisma" rv-value="character.charisma" />
+				<label>Pace:</label><input type="text" id="pace" rv-value="character.pace" />
+				<label>Parry:</label><input type="text" id="parry" rv-value="character.parry" />
+				<label>Toughness:</label><input type="text" id="toughness" rv-value="character.toughness "/>
+			</section>
+
+			<!-- Skills -->
+			<section class="card skills">
+				<h2>Skills</h2>
+				<list list-items="character.skills"></list>
+			</section>
+
+			<!-- Armor -->
+			<section class="card armor">
+				<h2>Armor</h2>
+				<p>Coming soon.</p>
+			</section>
+
+			<!-- Equipment -->
+			<section class="card equipment">
+				<h2>Equipment</h2>
+				<list list-items="character.equipment"></list>
+			</section>
+
+			<!-- Hindrances -->
+			<section class="card hindrances">
+				<h2>Hindrances</h2>
+				<list list-items="character.hindrances"></list>
+			</section>
+
+			<!-- Edges -->
+			<section class="card edges">
+				<h2>Edges</h2>
+				<list list-items="character.edges"></list>
+			</section>
+
+			<!-- Weapons -->
+			<section class="card weapons">
+				<h2>Weapons</h2>
+				<label>Name:</label><input type="text" />
+				<label>Range:</label><input type="text" />
+				<label>Rate of Fire:</label><input type="text" />
+				<label>Action Points:</label><input type="text" />
+				<label>Weight:</label><input type="text" />
+				<label>Notes:</label><input type="text" />
+			</section>
+
+		</section>
+	</script>
 </head>
 <body>
-<section class="wrapper">
-
 	<!-- Debug Tools -->
 	<section class="card debug-tools">
 		<button id="btn-clear-data">Clear Data</button>
@@ -25,109 +128,11 @@
 		<textarea id="txt-output-json"></textarea>
 		<button id="btn-import-json">Import JSON</button>
 		<textarea id="txt-import-json"></textarea>
+		<button id="btn-add-character">Add Character</button>
 	</section>
-
-	<!-- Character Profile -->
-	<section class="card character-profile">
-		<h2>Character Profile</h2>
-		<label>Name:</label><input type="text" class="name" rv-value="name" />
-		<label>Profession:</label><input type="text" class="profession" rv-value="profession"s/>
-		<label>Concept:</label><input type="text" class="concept" rv-value="concept" />
-		<label>Setting:</label><input type="text" class="setting" rv-value="setting"/>
-		<label>Quote:</label><textarea class="quote" rv-value="quote"> </textarea>
-		<label>Rank:</label>
-			<select rv-select="currentRank">
-				<option rv-each-cur-rank="possibleRanks" rv-value="%cur-rank%">{cur-rank}</option>
-			</select>
+	<section class="character-sheets">
+		<character-sheet rv-each-character="characters" character="character"></character-sheet>
 	</section>
-
-	<!-- Attributes -->
-	<section class="card attributes">
-		<h2>Attributes</h2>
-		<label>Agility:</label>
-		<ul class="die-list" rv-die-list="attributes.agility">
-			<li rv-each-die="dice">
-				<input type="radio" name="dice_agility" rv-value="die" />
-			</li>
-		</ul>
-		<label>Smarts:</label>
-		<ul class="die-list" rv-die-list="attributes.smarts">
-			<li rv-each-die="dice">
-				<input type="radio" name="smarts" rv-value="die" />
-			</li>
-		</ul>
-		<label>Spirit:</label>
-		<ul class="die-list" rv-die-list="attributes.spirit">
-			<li rv-each-die="dice">
-				<input type="radio" name="dice_spirit" rv-value="die" />
-			</li>
-		</ul>
-		<label>Strength:</label>
-		<ul class="die-list" rv-die-list="attributes.strength">
-			<li rv-each-die="dice">
-				<input type="radio" name="dice_strength" rv-value="die" />
-			</li>
-		</ul>
-		<label>Vigor:</label>
-			<ul class="die-list" rv-die-list="attributes.vigor">
-			<li rv-each-die="dice">
-				<input type="radio" name="dice_vigor" rv-value="die" />
-			</li>
-		</ul>
-	</section>
-
-	<!-- Derived Attributes -->
-	<section class="card derived-attributes">
-		<h2>Derived Attributes</h2>
-		<label>Charisma:</label><input type="text" id="charisma" />
-		<label>Pace:</label><input type="text" id="pace" />
-		<label>Parry:</label><input type="text" id="parry" />
-		<label>Toughness:</label><input type="text" id="toughness" />
-	</section>
-
-	<!-- Skills -->
-	<section class="card skills">
-		<h2>Skills</h2>
-		<list list-items="skills"></list>
-	</section>
-
-	<!-- Armor -->
-	<section class="card armor">
-		<h2>Armor</h2>
-		<p>Coming soon.</p>
-	</section>
-
-	<!-- Equipment -->
-	<section class="card equipment">
-		<h2>Equipment</h2>
-		<list list-items="equipment"></list>
-	</section>
-
-	<!-- Hindrances -->
-	<section class="card hindrances">
-		<h2>Hindrances</h2>
-		<list list-items="hindrances"></list>
-	</section>
-
-	<!-- Edges -->
-	<section class="card edges">
-		<h2>Edges</h2>
-		<list list-items="edges"></list>
-	</section>
-
-	<!-- Weapons -->
-	<section class="card weapons">
-		<h2>Weapons</h2>
-		<label>Name:</label><input type="text" />
-		<label>Range:</label><input type="text" />
-		<label>Rate of Fire:</label><input type="text" />
-		<label>Action Points:</label><input type="text" />
-		<label>Weight:</label><input type="text" />
-		<label>Notes:</label><input type="text" />
-	</section>
-
-
-</section>
-<script src='js/bundle.js'></script>
+	<script src='js/bundle.js'></script>
 </body>
 </html>
