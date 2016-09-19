@@ -36,11 +36,6 @@ rivets.controllers = {};
 
 // A character sheet
 rivets.controllers['character-sheet'] = function (el, model) {
-  // for(var prop in model.character) {
-  //   if(model.character.hasOwnProperty(prop)) {
-  //     this[prop] = model.character[prop];
-  //   }
-  // }
   this.character = model.character;
 };
 
