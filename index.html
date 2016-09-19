@@ -4,6 +4,11 @@
 	<title>Savage Worlds</title>
 	<link rel="stylesheet" type="text/css" href="css/screen.css" />
 
+	<script type="text/html" id="tpl-editable-text">
+		<input type="text" rv-value="character.name" />
+		<span rv-text="character.name"></span>
+	</script>
+
 	<script type="text/html" id="tpl-list">
 		<ul class="list">
 			<li rv-each-item="listItems">
@@ -14,12 +19,13 @@
 		</ul>
 		<button class="btn btn-add" rv-on-click="addItem">Add Skill</button>
 	</script>
+
 	<script type="text/html" id="tpl-character-sheet">
 		<section class="character-sheet wrapper">
+			<form>
 			<!-- Character Profile -->
 			<section class="card character-profile">
-				<h2>Character Profile</h2>
-				<label>Name:</label><input type="text" class="name" rv-value="character.name" />
+				<h2 class='name'><editable-text character="character"></editable-text></h2>
 				<label>Profession:</label><input type="text" class="profession" rv-value="character.profession"/>
 				<label>Concept:</label><input type="text" class="concept" rv-value="character.concept" />
 				<label>Setting:</label><input type="text" class="setting" rv-value="character.setting"/>
@@ -34,7 +40,6 @@
 			<section class="card attributes">
 				<h2>Attributes</h2>
 				<label>Agility:</label>
-				<form>
 				<ul class="die-list" rv-die-list="character.attributes.agility">
 					<li rv-each-die="character.dice">
 						<input type="radio" name="dice_agility" rv-value="die" />
@@ -64,7 +69,6 @@
 						<input type="radio" name="dice_vigor" rv-value="die" />
 					</li>
 				</ul>
-				</form>
 			</section>
 
 			<!-- Derived Attributes -->
@@ -117,7 +121,12 @@
 				<label>Notes:</label><input type="text" />
 			</section>
 
-		</section>
+			<section class="card">
+				<h2>Danger Zone</h2>
+				<button rv-on-click="removeItem">Delete Character</button>
+			</section>
+			
+		</form>
 	</script>
 </head>
 <body>
@@ -131,7 +140,7 @@
 		<button id="btn-add-character">Add Character</button>
 	</section>
 	<section class="character-sheets">
-		<character-sheet rv-each-character="characters" character="character"></character-sheet>
+		<character-sheet rv-each-character="characters" characters="characters" character="character"></character-sheet>
 	</section>
 	<script src='js/bundle.js'></script>
 </body>

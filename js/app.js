@@ -36,6 +36,51 @@ rivets.controllers = {};
 // A character sheet
 rivets.controllers['character-sheet'] = function (el, model) {
   this.character = model.character;
+  this.removeItem = function (event, item) {
+    for(var i=0; i<model.characters.length; i++) {
+      if(model.characters[i] === item.character) {
+        model.characters.splice(i, 1);
+      }
+    }
+    event.preventDefault();
+  };
+};
+
+// An editable text field
+rivets.controllers['editable-text'] = function (el, model) {
+  this.character = model.character;
+  
+  // Flag for whether or not the text is currently being edited by the used.
+  var editing = false;
+
+  // Shortcuts to inner elements.
+  var inputEl  = el.querySelector('input');
+  var outputEl = el.querySelector('span');
+
+  function startEditMode () {
+    if(editing) return;
+    editing = true;
+    inputEl.style.display = 'block';
+    outputEl.style.display = 'none';
+    inputEl.focus(); 
+  }
+
+  function endEditMode () {
+    editing = false;
+    inputEl.style.display = 'none';
+    outputEl.style.display = 'block';
+  }
+
+  // Assign UI event handlers.
+  outputEl.addEventListener('click', startEditMode);
+  inputEl.addEventListener('blur', endEditMode);
+  inputEl.addEventListener('focus', startEditMode);
+
+  el.tabIndex = 0;
+  el.addEventListener('focus', startEditMode);
+
+  // Set initial visual state.
+  endEditMode();
 };
 
 // An editiable list view
@@ -47,9 +92,11 @@ rivets.controllers['list'] = function (el, model) {
       name: "",
       die: "1d4"
     });
+    event.preventDefault();
   };
-  this.removeItem = function (e, o) {
-    model.listItems.splice(o.index, 1);
+  this.removeItem = function (event, item) {
+    model.listItems.splice(item.index, 1);
+    event.preventDefault();
   };
 };
 
@@ -68,6 +115,15 @@ rivets.components['character-sheet'] = {
   },
   initialize: function (el, model) {
     return new rivets.controllers['character-sheet'](el, model);
+  }
+};
+
+rivets.components['editable-text'] = {
+  template: function () {
+    return document.querySelector('#tpl-editable-text').innerHTML;
+  },
+  initialize: function (el, model) {
+    return new rivets.controllers['editable-text'](el, model);
   }
 };
 
@@ -131,6 +187,7 @@ var CLEAR_DATA = false;
 document.querySelector('#btn-clear-data').addEventListener('click', function () {
   storage.removeItem('savage-worlds-' + userName);
   CLEAR_DATA = true;
+  alert('Data cleared!');
 });
 
 document.querySelector('#btn-output-json').addEventListener('click', function () {
@@ -147,10 +204,17 @@ document.querySelector('#btn-add-character').addEventListener('click', function 
   );
 });
 
-window.onbeforeunload = function () {
+function saveOnExit () {
   // TODO: Remove this awful debug code.
   if(!CLEAR_DATA) saveData(userName, char);
-};
+}
+
+window.addEventListener('beforeunload', saveOnExit);
+
+// iOS doesn't support "beforeunload" for some reason.
+if(navigator.userAgent.match('iPad')) {
+  window.addEventListener('unload', saveOnExit);
+}
 
 
 
